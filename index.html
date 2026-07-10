@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DBU Smart CRM</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>DBU CRM</h2>
+
+            <span>Admission Portal</span>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li class="active">🏠 Dashboard</li>
+
+                <li>🎓 All Programs</li>
+
+                <li>🇮🇳 Indian Programs</li>
+
+                <li>🌍 International</li>
+
+                <li>🇺🇸 USA Programs</li>
+
+                <li>🇩🇪 Germany Programs</li>
+
+                <li>🎓 PhD</li>
+
+                <li>💳 Bihar Credit Card</li>
+
+                <li>💻 Online</li>
+
+                <li>📚 ODL</li>
+
+                <li>⭐ Favorites</li>
+
+            </ul>
+
+        </nav>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="main">
+
+        <!-- Header -->
+
+        <header class="topbar">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search Program, Faculty, Eligibility, Country...">
+
+            </div>
+
+            <div class="header-right">
+
+                <button id="darkModeBtn">
+
+                    🌙
+
+                </button>
+
+            </div>
+
+        </header>
+
+        <!-- Stats -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <h3 id="totalPrograms">0</h3>
+
+                <p>Total Programs</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3 id="totalFaculty">0</h3>
+
+                <p>Faculties</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3 id="internationalPrograms">0</h3>
+
+                <p>International</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3 id="onlinePrograms">0</h3>
+
+                <p>Online</p>
+
+            </div>
+
+        </section>
+
+        <!-- Body -->
+
+        <section class="content">
+
+            <!-- Filters -->
+
+            <aside class="filters">
+
+                <h2>Filters</h2>
+
+                <label>
+
+                    Faculty
+
+                    <select id="facultyFilter">
+
+                        <option value="">All</option>
+
+                    </select>
+
+                </label>
+
+                <label>
+
+                    Country
+
+                    <select id="countryFilter">
+
+                        <option value="">All</option>
+
+                    </select>
+
+                </label>
+
+                <label>
+
+                    Program Type
+
+                    <select id="categoryFilter">
+
+                        <option value="">All</option>
+
+                    </select>
+
+                </label>
+
+                <label>
+
+                    Mode
+
+                    <select id="modeFilter">
+
+                        <option value="">All</option>
+
+                    </select>
+
+                </label>
+
+                <button id="clearFilters">
+
+                    Clear Filters
+
+                </button>
+
+            </aside>
+
+            <!-- Program Cards -->
+
+            <section class="program-section">
+
+                <div class="section-header">
+
+                    <h2>
+
+                        Programs
+
+                    </h2>
+
+                    <span id="programCount">
+
+                        0 Results
+
+                    </span>
+
+                </div>
+
+                <div
+                    id="programGrid"
+                    class="program-grid">
+
+                </div>
+
+            </section>
+
+            <!-- Details -->
+
+            <aside
+                id="detailsPanel"
+                class="details-panel">
+
+                <div class="empty-state">
+
+                    <h2>
+
+                        Select a Program
+
+                    </h2>
+
+                    <p>
+
+                        Click any program card to view
+                        details.
+
+                    </p>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+    </main>
+
+    <!-- Loading -->
+
+    <div
+        id="loadingOverlay"
+        class="loading-overlay">
+
+        <div class="loader">
+
+            Loading Programs...
+
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+
+    <div
+        id="toast"
+        class="toast">
+
+    </div>
+
+    <!-- Scripts -->
+
+    <script type="module" src="app.js"></script>
+
+</body>
+
+</html>
