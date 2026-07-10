@@ -521,3 +521,135 @@ return `
 `;
 
 }
+/* ==========================================
+   ACTION BUTTONS
+========================================== */
+
+import { generateWhatsApp } from "./whatsapp.js";
+import { toggleFavorite } from "./favorites.js";
+import { copyToClipboard } from "./utils.js";
+
+function actionButtons(program){
+
+return `
+
+<section class="details-card">
+
+<h2>Quick Actions</h2>
+
+<div class="action-grid">
+
+<button class="action-btn primary"
+id="btnWhatsapp">
+
+📱 WhatsApp
+
+</button>
+
+<button class="action-btn"
+
+id="btnCopy">
+
+📋 Copy Details
+
+</button>
+
+<button class="action-btn"
+
+id="btnFavorite">
+
+⭐ Favorite
+
+</button>
+
+<button class="action-btn"
+
+id="btnShare">
+
+🔗 Share
+
+</button>
+
+</div>
+
+</section>
+
+`;
+
+}
+
+/* ==========================================
+   INITIALIZE EVENTS
+========================================== */
+
+export function initializeDetailEvents(program){
+
+const whatsapp=document.getElementById("btnWhatsapp");
+
+const copy=document.getElementById("btnCopy");
+
+const favorite=document.getElementById("btnFavorite");
+
+const share=document.getElementById("btnShare");
+
+/* WhatsApp */
+
+whatsapp?.addEventListener("click",()=>{
+
+const message=generateWhatsApp(program);
+
+const url=`https://wa.me/?text=${encodeURIComponent(message)}`;
+
+window.open(url,"_blank");
+
+});
+
+/* Copy */
+
+copy?.addEventListener("click",()=>{
+
+copyToClipboard(JSON.stringify(program,null,2));
+
+alert("Program copied successfully.");
+
+});
+
+/* Favorite */
+
+favorite?.addEventListener("click",()=>{
+
+const status=toggleFavorite(program);
+
+favorite.innerHTML=status
+? "⭐ Saved"
+: "⭐ Favorite";
+
+});
+
+/* Share */
+
+share?.addEventListener("click",()=>{
+
+if(navigator.share){
+
+navigator.share({
+
+title:program.name,
+
+text:program.name,
+
+url:window.location.href
+
+});
+
+}else{
+
+copyToClipboard(window.location.href);
+
+alert("Link copied.");
+
+}
+
+});
+
+}
