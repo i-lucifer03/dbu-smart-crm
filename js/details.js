@@ -18,7 +18,9 @@ let currentProgram = null;
 export function showProgramDetails(program) {
 
     currentProgram = program;
-
+setTimeout(() => {
+    renderAdditionalDetails(program);
+}, 0);
     const panel = document.getElementById("detailsPanel");
 
     if (!panel) return;
