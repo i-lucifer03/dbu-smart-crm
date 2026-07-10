@@ -3,6 +3,7 @@
 // cards.js
 // ==========================================
 
+import { showProgramDetails } from "./details.js";
 const grid = document.getElementById("programGrid");
 const detailsPanel = document.getElementById("detailsPanel");
 
