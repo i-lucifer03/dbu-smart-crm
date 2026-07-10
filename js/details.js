@@ -598,3 +598,345 @@ export function getCurrentProgram(){
 return currentProgram;
 
 }
+/* ====================================================
+   ACTIONS
+==================================================== */
+
+function renderActions(program){
+
+    const container=document.getElementById("programActions");
+
+    if(!container) return;
+
+    container.innerHTML=`
+
+<section class="details-card">
+
+<h2>
+
+Quick Actions
+
+</h2>
+
+<div class="action-grid">
+
+<button
+class="action-btn whatsapp"
+id="btnWhatsapp">
+
+📱 WhatsApp
+
+</button>
+
+<button
+class="action-btn"
+id="btnCopy">
+
+📋 Copy
+
+</button>
+
+<button
+class="action-btn"
+id="btnFavorite">
+
+⭐ Favorite
+
+</button>
+
+<button
+class="action-btn"
+id="btnShare">
+
+🔗 Share
+
+</button>
+
+<button
+class="action-btn"
+id="btnPrint">
+
+🖨️ Print
+
+</button>
+
+<button
+class="action-btn"
+id="btnDownload">
+
+📄 Summary
+
+</button>
+
+</div>
+
+<div
+id="actionMessage"
+class="action-message">
+
+</div>
+
+</section>
+
+`;
+
+    bindEvents(program);
+
+}
+
+/* ====================================================
+   EVENTS
+==================================================== */
+
+function bindEvents(program){
+
+    document
+    .getElementById("btnWhatsapp")
+    ?.addEventListener(
+        "click",
+        ()=>shareWhatsapp(program)
+    );
+
+    document
+    .getElementById("btnCopy")
+    ?.addEventListener(
+        "click",
+        ()=>copyProgram(program)
+    );
+
+    document
+    .getElementById("btnFavorite")
+    ?.addEventListener(
+        "click",
+        ()=>favoriteProgram(program)
+    );
+
+    document
+    .getElementById("btnShare")
+    ?.addEventListener(
+        "click",
+        ()=>shareProgram(program)
+    );
+
+    document
+    .getElementById("btnPrint")
+    ?.addEventListener(
+        "click",
+        printProgram
+    );
+
+    document
+    .getElementById("btnDownload")
+    ?.addEventListener(
+        "click",
+        ()=>downloadSummary(program)
+    );
+
+}
+
+/* ====================================================
+   WHATSAPP
+==================================================== */
+
+function shareWhatsapp(program){
+
+    const message=
+        generateWhatsApp(program);
+
+    const url=
+`https://wa.me/?text=${encodeURIComponent(message)}`;
+
+    window.open(url,"_blank");
+
+}
+
+/* ====================================================
+   COPY
+==================================================== */
+
+function copyProgram(program){
+
+const text=`
+
+Program : ${program.name}
+
+Faculty : ${program.faculty}
+
+Duration : ${program.duration}
+
+Eligibility :
+${program.eligibility}
+
+Semester Fee :
+${formatCurrency(program.semesterFee)}
+
+Annual Fee :
+${formatCurrency(program.annualFee)}
+
+Total Fee :
+${formatCurrency(program.totalFee)}
+
+Registration :
+${formatCurrency(program.registrationFee)}
+
+Hostel :
+${formatCurrency(program.hostelFee)}
+
+`;
+
+copyToClipboard(text);
+
+notify("Program copied.");
+
+}
+
+/* ====================================================
+   FAVORITE
+==================================================== */
+
+function favoriteProgram(program){
+
+    const saved=
+        toggleFavorite(program);
+
+    notify(
+
+        saved
+
+        ? "Added to favorites."
+
+        : "Removed from favorites."
+
+    );
+
+}
+
+/* ====================================================
+   SHARE
+==================================================== */
+
+async function shareProgram(program){
+
+    if(navigator.share){
+
+        await navigator.share({
+
+            title:program.name,
+
+            text:program.name,
+
+            url:window.location.href
+
+        });
+
+        return;
+
+    }
+
+    copyToClipboard(window.location.href);
+
+    notify("Link copied.");
+
+}
+
+/* ====================================================
+   PRINT
+==================================================== */
+
+function printProgram(){
+
+    window.print();
+
+}
+
+/* ====================================================
+   DOWNLOAD SUMMARY
+==================================================== */
+
+function downloadSummary(program){
+
+const summary=`
+
+Program
+
+${program.name}
+
+Faculty
+
+${program.faculty}
+
+Duration
+
+${program.duration}
+
+Eligibility
+
+${program.eligibility}
+
+Semester Fee
+
+${formatCurrency(program.semesterFee)}
+
+Annual Fee
+
+${formatCurrency(program.annualFee)}
+
+Total Fee
+
+${formatCurrency(program.totalFee)}
+
+`;
+
+const blob=new Blob(
+
+    [summary],
+
+    {type:"text/plain"}
+
+);
+
+const url=URL.createObjectURL(blob);
+
+const a=document.createElement("a");
+
+a.href=url;
+
+a.download=
+
+`${program.name}.txt`;
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+notify("Summary downloaded.");
+
+}
+
+/* ====================================================
+   NOTIFICATION
+==================================================== */
+
+function notify(message){
+
+const box=
+
+document.getElementById(
+
+"actionMessage"
+
+);
+
+if(!box) return;
+
+box.innerHTML=message;
+
+box.classList.add("show");
+
+setTimeout(()=>{
+
+box.classList.remove("show");
+
+},2500);
+
+}
