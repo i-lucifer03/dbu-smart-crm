@@ -1,0 +1,601 @@
+/* ===========================
+   DBU SMART CRM
+   Version 1.0
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+
+    --primary:#2563eb;
+    --primary-light:#dbeafe;
+
+    --background:#f5f7fb;
+
+    --card:#ffffff;
+
+    --sidebar:#111827;
+
+    --sidebar-text:#d1d5db;
+
+    --text:#111827;
+
+    --muted:#6b7280;
+
+    --border:#e5e7eb;
+
+    --success:#22c55e;
+
+    --danger:#ef4444;
+
+    --shadow:0 10px 30px rgba(0,0,0,.06);
+
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+
+    background:var(--background);
+
+    color:var(--text);
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+/* Sidebar */
+
+.sidebar{
+
+    width:260px;
+
+    background:var(--sidebar);
+
+    color:white;
+
+    padding:25px;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    bottom:0;
+
+    overflow:auto;
+
+}
+
+.logo h2{
+
+    font-size:26px;
+
+    font-weight:700;
+
+}
+
+.logo span{
+
+    color:#9ca3af;
+
+    font-size:13px;
+
+}
+
+nav{
+
+    margin-top:40px;
+
+}
+
+nav ul{
+
+    list-style:none;
+
+}
+
+nav li{
+
+    padding:14px 15px;
+
+    margin-bottom:8px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    color:var(--sidebar-text);
+
+    transition:.25s;
+
+}
+
+nav li:hover{
+
+    background:#1f2937;
+
+}
+
+nav li.active{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+/* Main */
+
+.main{
+
+    margin-left:260px;
+
+    width:calc(100% - 260px);
+
+    padding:30px;
+
+}
+
+/* Topbar */
+
+.topbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.search-box{
+
+    flex:1;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+    max-width:650px;
+
+    padding:15px 18px;
+
+    border-radius:14px;
+
+    border:1px solid var(--border);
+
+    font-size:15px;
+
+    outline:none;
+
+    background:white;
+
+}
+
+.search-box input:focus{
+
+    border-color:var(--primary);
+
+}
+
+.header-right button{
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    background:white;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    box-shadow:var(--shadow);
+
+    font-size:18px;
+
+}
+
+/* Stats */
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+    margin-bottom:25px;
+
+}
+
+.stat-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.stat-card h3{
+
+    font-size:30px;
+
+    color:var(--primary);
+
+}
+
+.stat-card p{
+
+    color:var(--muted);
+
+    margin-top:8px;
+
+}
+
+/* Layout */
+
+.content{
+
+    display:grid;
+
+    grid-template-columns:250px 1fr 380px;
+
+    gap:22px;
+
+}
+
+/* Filters */
+
+.filters{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    box-shadow:var(--shadow);
+
+    height:fit-content;
+
+}
+
+.filters h2{
+
+    margin-bottom:20px;
+
+    font-size:20px;
+
+}
+
+.filters label{
+
+    display:block;
+
+    margin-bottom:18px;
+
+    font-size:14px;
+
+    color:var(--muted);
+
+}
+
+.filters select{
+
+    width:100%;
+
+    margin-top:8px;
+
+    padding:11px;
+
+    border-radius:10px;
+
+    border:1px solid var(--border);
+
+}
+
+.filters button{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:12px;
+
+    border:none;
+
+    background:var(--primary);
+
+    color:white;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+}
+
+/* Programs */
+
+.program-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.section-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.program-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+
+    gap:18px;
+
+}
+
+/* Card */
+
+.program-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:var(--shadow);
+
+    border:1px solid transparent;
+
+}
+
+.program-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:var(--primary);
+
+}
+
+.program-title{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+.program-faculty{
+
+    color:var(--muted);
+
+    margin-bottom:15px;
+
+}
+
+.badge{
+
+    display:inline-block;
+
+    padding:6px 10px;
+
+    border-radius:30px;
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+    font-size:12px;
+
+    margin-right:6px;
+
+    margin-bottom:6px;
+
+}
+
+.fee{
+
+    margin-top:15px;
+
+    font-weight:700;
+
+    color:var(--success);
+
+}
+
+/* Details */
+
+.details-panel{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    box-shadow:var(--shadow);
+
+    min-height:700px;
+
+}
+
+.empty-state{
+
+    text-align:center;
+
+    color:var(--muted);
+
+    margin-top:120px;
+
+}
+
+.empty-state h2{
+
+    margin-bottom:12px;
+
+}
+
+/* Loading */
+
+.loading-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(255,255,255,.9);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.loader{
+
+    background:white;
+
+    padding:20px 35px;
+
+    border-radius:14px;
+
+    box-shadow:var(--shadow);
+
+    font-weight:600;
+
+}
+
+/* Toast */
+
+.toast{
+
+    position:fixed;
+
+    right:25px;
+
+    bottom:25px;
+
+    background:#111827;
+
+    color:white;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    display:none;
+
+    z-index:10000;
+
+}
+
+/* Responsive */
+
+@media(max-width:1200px){
+
+    .content{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .details-panel{
+
+        min-height:auto;
+
+    }
+
+}
+
+@media(max-width:900px){
+
+    .sidebar{
+
+        display:none;
+
+    }
+
+    .main{
+
+        margin-left:0;
+
+        width:100%;
+
+    }
+
+    .stats{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .program-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .topbar{
+
+        flex-direction:column;
+
+        gap:15px;
+
+        align-items:stretch;
+
+    }
+
+}
