@@ -115,7 +115,7 @@ function createCard(program) {
 
     card.addEventListener("click", () => {
 
-        openDetails(program);
+        showProgramDetails(program);
 
     });
 
