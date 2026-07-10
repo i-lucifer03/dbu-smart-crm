@@ -924,3 +924,52 @@ grid-template-columns:1fr;
 }
 
 }
+/* =======================================
+EXTRA DETAILS
+======================================= */
+
+.approval-container{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:10px;
+
+margin-top:15px;
+
+}
+
+.approval-chip{
+
+background:#dbeafe;
+
+color:#1d4ed8;
+
+padding:8px 14px;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:600;
+
+}
+
+.info-row{
+
+display:flex;
+
+justify-content:space-between;
+
+padding:12px 0;
+
+border-bottom:1px solid #e5e7eb;
+
+}
+
+.info-row:last-child{
+
+border-bottom:none;
+
+}
