@@ -261,3 +261,261 @@ export function getCurrentProgram(){
 return currentProgram;
 
 }
+/* ==========================================
+   ADDITIONAL DETAILS SECTION
+========================================== */
+
+export function renderAdditionalDetails(program){
+
+    const container = document.getElementById("details-extra");
+
+    if(!container) return;
+
+    container.innerHTML = `
+
+        ${eligibilitySection(program)}
+
+        ${entranceSection(program)}
+
+        ${approvalSection(program)}
+
+        ${careerSection(program)}
+
+        ${descriptionSection(program)}
+
+        ${internationalSection(program)}
+
+    `;
+
+}
+
+/* ==========================================
+   ELIGIBILITY
+========================================== */
+
+function eligibilitySection(program){
+
+return `
+
+<section class="details-card">
+
+<h2>Eligibility</h2>
+
+<p>
+
+${safeText(program.eligibility || "Not Available")}
+
+</p>
+
+</section>
+
+`;
+
+}
+
+/* ==========================================
+   ENTRANCE TEST
+========================================== */
+
+function entranceSection(program){
+
+return `
+
+<section class="details-card">
+
+<h2>Admission Process</h2>
+
+<div class="info-grid">
+
+<div>
+
+<label>Entrance Test</label>
+
+<p>${safeText(program.entrance || "Direct Admission")}</p>
+
+</div>
+
+<div>
+
+<label>Seats</label>
+
+<p>${safeText(program.seats || "N/A")}</p>
+
+</div>
+
+<div>
+
+<label>Status</label>
+
+<p>${safeText(program.status || "Open")}</p>
+
+</div>
+
+<div>
+
+<label>Category</label>
+
+<p>${safeText(program.category || "-")}</p>
+
+</div>
+
+</div>
+
+</section>
+
+`;
+
+}
+
+/* ==========================================
+   APPROVALS
+========================================== */
+
+function approvalSection(program){
+
+let approvals="";
+
+if(Array.isArray(program.approvals)){
+
+    approvals=program.approvals
+    .map(item=>`<span class="approval-chip">${safeText(item)}</span>`)
+    .join("");
+
+}else{
+
+    approvals=`<span class="approval-chip">
+
+${safeText(program.approvals||"Not Available")}
+
+</span>`;
+
+}
+
+return `
+
+<section class="details-card">
+
+<h2>Recognitions & Approvals</h2>
+
+<div class="approval-container">
+
+${approvals}
+
+</div>
+
+</section>
+
+`;
+
+}
+
+/* ==========================================
+   CAREER
+========================================== */
+
+function careerSection(program){
+
+return `
+
+<section class="details-card">
+
+<h2>Career Opportunities</h2>
+
+<p>
+
+${safeText(program.career || "Information not available.")}
+
+</p>
+
+</section>
+
+`;
+
+}
+
+/* ==========================================
+   DESCRIPTION
+========================================== */
+
+function descriptionSection(program){
+
+return `
+
+<section class="details-card">
+
+<h2>About this Program</h2>
+
+<p>
+
+${safeText(program.description || "No description available.")}
+
+</p>
+
+</section>
+
+`;
+
+}
+
+/* ==========================================
+   INTERNATIONAL
+========================================== */
+
+function internationalSection(program){
+
+const rows=[];
+
+if(program.country)
+rows.push(infoRow("Country",program.country));
+
+if(program.studentCategory)
+rows.push(infoRow("Student Category",program.studentCategory));
+
+if(program.currency)
+rows.push(infoRow("Currency",program.currency));
+
+if(program.language)
+rows.push(infoRow("Language",program.language));
+
+if(program.visaRequired)
+rows.push(infoRow("Visa Required",program.visaRequired));
+
+if(program.equivalenceRequired)
+rows.push(infoRow("Equivalence",program.equivalenceRequired));
+
+if(rows.length===0)
+return "";
+
+return `
+
+<section class="details-card">
+
+<h2>International Admission</h2>
+
+${rows.join("")}
+
+</section>
+
+`;
+
+}
+
+/* ==========================================
+   INFO ROW
+========================================== */
+
+function infoRow(title,value){
+
+return `
+
+<div class="info-row">
+
+<strong>${safeText(title)}</strong>
+
+<span>${safeText(value)}</span>
+
+</div>
+
+`;
+
+}
